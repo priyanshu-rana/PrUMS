@@ -7,3 +7,12 @@ class Student(models.Model):
     email = models.EmailField()
     address = models.TextField()
     profile_image = models.ImageField()
+
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    email = models.EmailField()
+    address = models.TextField()
+    profile_image = models.ImageField()
+    salary = models.IntegerField()
