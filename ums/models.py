@@ -3,19 +3,19 @@ from django.db import models
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
-    age = models.IntegerField()
+    date_of_birth = models.DateField(default=None)
     email = models.EmailField()
-    address = models.TextField()
-    profile_image = models.ImageField()
+    address = models.TextField(blank=True)
+    profile_image = models.ImageField(blank=True)
 
 
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
-    age = models.IntegerField()
+    date_of_birth = models.DateField(default=None)
     email = models.EmailField()
-    address = models.TextField()
-    profile_image = models.ImageField()
     salary = models.IntegerField()
+    address = models.TextField(blank=True)
+    profile_image = models.ImageField(blank=True)
 
 
 class Deparment(models.Model):
