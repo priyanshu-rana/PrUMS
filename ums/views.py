@@ -2,5 +2,5 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-def student():
+def student(request):
     return HttpResponse("Student list")
