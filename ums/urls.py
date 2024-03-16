@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import student
+from .views import student_list
 
 urlpatterns = [
-    path("student/", student, name="student"),
+    path("student-list/", student_list, name="student-list"),
 ]
