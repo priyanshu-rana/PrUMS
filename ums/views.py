@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Student
-from .serializers import StudentSerializer
+from .serializers import StudentSerializer, StudentUpdateSerializer
 
 
 def student_list(request):
@@ -28,7 +28,7 @@ class StudentCRUD(APIView):
 
     def put(self, request, student_id):
         student = get_object_or_404(Student, pk=student_id)
-        serializer = StudentSerializer(student, data=request.data)
+        serializer = StudentUpdateSerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
