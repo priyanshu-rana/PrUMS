@@ -13,7 +13,7 @@ def student_list(request):
     return JsonResponse(serializer.data, safe=False)
 
 
-class StudentDetail(APIView):
+class Student(APIView):
     def get(self, request, student_id):
         student = get_object_or_404(Student, pk=student_id)
         serializer = StudentSerializer(student)
@@ -24,4 +24,12 @@ class StudentDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, student_id):
+        student = get_object_or_404(Student, pk=student_id)
+        serializer = StudentSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
