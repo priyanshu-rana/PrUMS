@@ -13,7 +13,7 @@ def student_list(request):
     return JsonResponse(serializer.data, safe=False)
 
 
-class Student(APIView):
+class StudentCRUD(APIView):
     def get(self, request, student_id):
         student = get_object_or_404(Student, pk=student_id)
         serializer = StudentSerializer(student)
