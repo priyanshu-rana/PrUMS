@@ -3,8 +3,11 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+import logging
 from .models import Student
 from .serializers import StudentSerializer, StudentUpdateSerializer
+
+logger = logging.getLogger(__name__)
 
 
 def student_list(request):
@@ -33,3 +36,24 @@ class StudentCRUD(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, student_id):
+        try:
+            student = Student.objects.get(pk=student_id)
+            student.delete()
+            return Response(
+                {"message": "Student deleted successfully"},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        except Student.DoesNotExist:
+            return Response(
+                {"error": "Student does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            logger.error(
+                f"An unexpected error occurred while deleting the student: {str(e)}"
+            )
+            return Response(
+                {"error": "An unexpected error occurred while deleting the student"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
