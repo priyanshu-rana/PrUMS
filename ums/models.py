@@ -4,7 +4,7 @@ from django.db import models
 class Student(models.Model):
     name = models.CharField(max_length=100)
     date_of_birth = models.DateField(default=None)
-    email = models.EmailField()  # TODO:Use unique=True
+    email = models.EmailField(unique=True)
     address = models.TextField(blank=True)
     profile_image = models.ImageField(blank=True)
 
@@ -12,7 +12,7 @@ class Student(models.Model):
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
     date_of_birth = models.DateField(default=None)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     salary = models.IntegerField()
     address = models.TextField(blank=True)
     profile_image = models.ImageField(blank=True)
