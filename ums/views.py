@@ -10,10 +10,11 @@ from .serializers import StudentSerializer, StudentUpdateSerializer
 logger = logging.getLogger(__name__)
 
 
-def student_list(request):
-    student = Student.objects.all()
-    serializer = StudentSerializer(student, many=True)
-    return JsonResponse(serializer.data, safe=False)
+class StudentList(APIView):
+    def get(self, request):
+        student = Student.objects.all()
+        serializer = StudentSerializer(student, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 class StudentCRUD(APIView):
