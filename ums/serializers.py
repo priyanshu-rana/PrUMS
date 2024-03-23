@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Student
+from .models import Student, Teacher
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -18,3 +18,17 @@ class StudentUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ["id", "name", "date_of_birth", "email", "address", "profile_image"]
+
+
+class TeacherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = [
+            "id",
+            "name",
+            "date_of_birth",
+            "email",
+            "address",
+            "salary",
+            "profile_image",
+        ]
