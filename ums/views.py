@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import logging
-from .models import Student
-from .serializers import StudentSerializer, StudentUpdateSerializer
+from .models import Student, Teacher
+from .serializers import StudentSerializer, StudentUpdateSerializer, TeacherSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -58,3 +58,12 @@ class StudentCRUD(APIView):
                 {"error": "An unexpected error occurred while deleting the student"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+
+class TeacherCRUD(APIView):
+    def post(self, request):
+        serializer = TeacherSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
